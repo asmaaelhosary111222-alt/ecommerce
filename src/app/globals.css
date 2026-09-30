@@ -1,26 +1,82 @@
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Prevent horizontal page overflow */
+html,
+body {
+  overflow-x: hidden;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ---------------------------------------
+   Hero Slider Content Animation
+--------------------------------------- */
+
+.slide-content h1,
+.slide-content p,
+.slide-content .slide-buttons {
+  opacity: 0;
+  transform: translateY(20px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.swiper-slide-active .slide-content h1 {
+  animation: fadeUp 0.6s ease forwards;
+  animation-delay: 0.1s;
+}
+
+.swiper-slide-active .slide-content p {
+  animation: fadeUp 0.6s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.swiper-slide-active .slide-content .slide-buttons {
+  animation: fadeUp 0.6s ease forwards;
+  animation-delay: 0.5s;
+}
+
+/* ---------------------------------------
+   General Hero Animation
+--------------------------------------- */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+.animate-hero {
+  animation: heroFadeUp 0.8s ease-out;
+}
+
+/* ---------------------------------------
+   Reduced Motion Accessibility
+--------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-content h1,
+  .slide-content p,
+  .slide-content .slide-buttons,
+  .animate-hero {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
+
